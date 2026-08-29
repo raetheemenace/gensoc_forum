@@ -79,22 +79,15 @@ export default function Navbar() {
           {/* Logo / Course Brand */}
           <button
             onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-3 text-left group cursor-pointer"
+            className="flex flex-col text-left group cursor-pointer"
             aria-label="Scroll to top"
           >
-            <div className={`w-8 h-8 rounded-sm flex items-center justify-center font-bold text-xs transition-colors ${
-              isScrolled ? 'bg-black text-white' : 'bg-white text-black'
-            }`}>
-              W10
-            </div>
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest block opacity-75 leading-none">
-                GEE001B • Section IT31S3
-              </span>
-              <span className="text-sm font-bold tracking-tight block leading-snug">
-                Gender & Society Forum
-              </span>
-            </div>
+            <span className="text-[10px] font-mono uppercase tracking-widest block opacity-75 leading-none mb-1">
+              GEE001B • Section IT31S3
+            </span>
+            <span className="text-sm sm:text-base font-bold tracking-tight block leading-snug">
+              Gender &amp; Society Forum
+            </span>
           </button>
 
           {/* Desktop Navigation Links */}

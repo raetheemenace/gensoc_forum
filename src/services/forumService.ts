@@ -129,7 +129,7 @@ export async function getComments(): Promise<ForumComment[]> {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (!error && Array.isArray(data) && data.length > 0) {
+      if (!error && Array.isArray(data)) {
         const formatted: ForumComment[] = data.map((item) => ({
           id: item.id,
           author: item.author || 'Anonymous Contributor',
@@ -161,7 +161,7 @@ export async function getComments(): Promise<ForumComment[]> {
     const res = await fetch('/api/comments', { signal: AbortSignal.timeout(3000) });
     if (res.ok) {
       const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         saveLocalComments(data);
         return data;
       }
@@ -172,6 +172,49 @@ export async function getComments(): Promise<ForumComment[]> {
 
   // 3. Fallback to Local Storage
   return getLocalComments();
+}
+
+/**
+ * Delete a comment from Supabase, backend API, and local state
+ */
+export async function deleteComment(commentId: string): Promise<boolean> {
+  // 1. Remove from local storage immediately
+  const current = getLocalComments();
+  const filtered = current.filter(c => c.id !== commentId);
+  saveLocalComments(filtered);
+
+  // 2. Delete from Supabase
+  const sb = getSupabaseClient();
+  if (sb) {
+    try {
+      await sb.from('forum_comments').delete().eq('id', commentId);
+    } catch (err) {
+      console.warn('Supabase delete error:', err);
+    }
+  }
+
+  // 3. Delete from Express API if active
+  try {
+    await fetch(`/api/comments/${commentId}`, {
+      method: 'DELETE',
+      signal: AbortSignal.timeout(3000)
+    });
+  } catch {
+    // ignore
+  }
+
+  return true;
+}
+
+/**
+ * Reset local storage cache completely
+ */
+export function clearLocalCommentCache(): void {
+  try {
+    localStorage.removeItem(LOCAL_STORAGE_COMMENTS_KEY);
+  } catch (e) {
+    console.warn('Could not clear local storage', e);
+  }
 }
 
 /**

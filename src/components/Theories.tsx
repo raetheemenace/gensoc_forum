@@ -7,7 +7,6 @@ const theories = [
     id: 'theory-1',
     category: 'Theological & Spiritual Shift',
     title: 'Goddess Worship to God Worship',
-    citation: '[cite: 1]',
     subtitle: 'From Reverence of Fertility to Violent Marginalization',
     description: "Early human civilizations celebrated and revered women for their fertility, a period characterized by goddess-based social organization. The transition from female-centric to male-centric worship was a slow, violent process that marginalized women's status.",
     analyticalPoints: [
@@ -22,7 +21,6 @@ const theories = [
     id: 'theory-2',
     category: 'Ideological & Moral Framing',
     title: 'Eve and the Other',
-    citation: '[cite: 1]',
     subtitle: 'Religious Codification of Female Folly and Subordination',
     description: "Western religions introduced negative perceptions of women, often portraying them as feeble-minded. The Judeo-Christian story of Eve is a prime example, depicting a woman's folly as the cause of human suffering.",
     analyticalPoints: [
@@ -37,7 +35,6 @@ const theories = [
     id: 'theory-3',
     category: 'Materialist & Socioeconomic Shift',
     title: 'A Shift of Production',
-    citation: '[cite: 1]',
     subtitle: 'Agrarian Expansion and the Subjugation of Reproductive Labor',
     description: "The societal shift from hunter-gathering to agriculture required immense manpower, turning reproduction into an essential, highly controlled task. Women were consequently reduced to passive incubators, whose primary role was producing the next generation of laborers.",
     analyticalPoints: [
@@ -128,9 +125,6 @@ export default function Theories() {
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[11px] font-semibold tracking-wider uppercase text-gray-500">
                     {theory.category}
-                  </span>
-                  <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded-xs font-mono font-bold">
-                    {theory.citation}
                   </span>
                 </div>
 

@@ -117,7 +117,7 @@ app.get('/api/comments', async (req, res) => {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (!error && Array.isArray(data) && data.length > 0) {
+      if (!error && Array.isArray(data)) {
         const formatted: ForumComment[] = data.map((item) => ({
           id: item.id,
           author: item.author || 'Anonymous Contributor',
@@ -371,6 +371,25 @@ app.post('/api/comments/:id/replies/:replyId/like', async (req, res) => {
         .eq('id', id);
     } catch (err) {
       console.warn('Supabase reply like update failed:', err);
+    }
+  }
+
+  res.json({ success: true });
+});
+
+// DELETE comment endpoint
+app.delete('/api/comments/:id', async (req, res) => {
+  const { id } = req.params;
+  const currentComments = readComments();
+  const filtered = currentComments.filter(c => c.id !== id);
+  writeComments(filtered);
+
+  const sb = getServerSupabase();
+  if (sb) {
+    try {
+      await sb.from('forum_comments').delete().eq('id', id);
+    } catch (err) {
+      console.warn('Supabase delete error:', err);
     }
   }
 

@@ -39,9 +39,22 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15] max-w-3xl"
+          className="mb-6 max-w-4xl text-center leading-tight"
         >
-          Understanding the Roots of Gender Oppression & Feminist Advocacy
+          <span className="block font-sans-modern font-normal text-xs sm:text-sm md:text-base uppercase tracking-[0.28em] text-gray-300 mb-3 sm:mb-4">
+            Understanding the Roots of
+          </span>
+          <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.08] tracking-tight">
+            <span className="font-playfair italic font-normal text-white inline-block">
+              Gender Oppression
+            </span>
+            <span className="inline-block font-playfair italic font-light text-gray-400 mx-2 sm:mx-3 md:mx-4 text-2xl sm:text-4xl md:text-5xl">
+              &amp;
+            </span>
+            <span className="font-playfair font-bold text-white tracking-normal inline-block">
+              Feminist Advocacy
+            </span>
+          </span>
         </motion.h1>
 
         <motion.p

@@ -7,7 +7,6 @@ const coreTheories = [
     id: 'liberal',
     title: 'Liberal Feminism',
     icon: Scale,
-    citation: '[cite: 2]',
     tagline: 'Gradualist Institutional & Legal Reform',
     content: "A gradualist approach that seeks to improve women's position by promoting equal opportunity through legislation and challenging unequal socialization processes.",
     diagnosis: "Rooted in customary beliefs, legal discrimination, and unequal early childhood socialization that restricts women's civil potential.",
@@ -19,7 +18,6 @@ const coreTheories = [
     id: 'radical',
     title: 'Radical Feminism',
     icon: Flame,
-    citation: '[cite: 2]',
     tagline: 'Patriarchal Dismantling & Structural Revolution',
     content: "Focuses on patriarchy and men's systemic privilege, arguing that personal miseries experienced by women are actually political issues rooted in power imbalances.",
     diagnosis: "Patriarchy is the foundational, most pervasive system of power; male control over female bodies, reproduction, and sexuality constitutes primary subordination.",
@@ -31,7 +29,6 @@ const coreTheories = [
     id: 'socialist',
     title: 'Socialist / Marxist Feminism',
     icon: DollarSign,
-    citation: '[cite: 2]',
     tagline: 'Capitalist Property & Class Critique',
     content: "Attributes women's oppression to the private property system within capitalist and class-based social structures.",
     diagnosis: "Capitalism relies on unpaid reproductive care work (cooking, cleaning, childbearing) performed by women to subsidize and replenish the labor force.",
@@ -43,7 +40,6 @@ const coreTheories = [
     id: 'postmodern',
     title: 'Postmodern Feminism',
     icon: MessageCircle,
-    citation: '[cite: 2]',
     tagline: 'Linguistic Deconstruction & Multiplicity',
     content: "Focuses on how societal discourse and language create assumptions about women, acknowledging the complexity and diversity of social relations.",
     diagnosis: "Power operates through discourse, cultural narratives, and language systems that construct binary categories (male/female, rational/emotional).",
@@ -128,9 +124,6 @@ export default function FeministTheories() {
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xs uppercase font-bold tracking-widest text-gray-500">
                     {activeTheory.tagline}
-                  </span>
-                  <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded-xs font-mono font-bold">
-                    {activeTheory.citation}
                   </span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">

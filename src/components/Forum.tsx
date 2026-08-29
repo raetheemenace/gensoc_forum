@@ -16,7 +16,8 @@ import {
   BookOpen,
   CornerDownRight,
   RefreshCw,
-  AlertCircle
+  AlertCircle,
+  Trash2
 } from 'lucide-react';
 import { ForumComment, CommentReply } from '../types';
 import { DISCUSSION_PROMPTS, FORUM_TAGS } from '../data/forumData';
@@ -25,7 +26,9 @@ import {
   createComment as postForumComment, 
   toggleLikeComment as apiToggleLikeComment, 
   createReply as postForumReply, 
-  toggleLikeReply as apiToggleLikeReply 
+  toggleLikeReply as apiToggleLikeReply,
+  deleteComment as deleteForumComment,
+  clearLocalCommentCache
 } from '../services/forumService';
 
 const LOCAL_LIKES_KEY = 'gender_society_user_liked_posts';
@@ -259,6 +262,24 @@ export default function Forum() {
     navigator.clipboard.writeText(`"${content}" — GEE001B Gender & Society Forum`);
     setCopiedId(commentId);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this comment? This will remove it from the forum and database.');
+    if (!confirmDelete) return;
+
+    // Optimistic UI removal
+    setComments(prev => prev.filter(c => c.id !== commentId));
+    try {
+      await deleteForumComment(commentId);
+    } catch {
+      fetchComments(true);
+    }
+  };
+
+  const handleForceSync = async () => {
+    clearLocalCommentCache();
+    await fetchComments(false);
   };
 
   // Filtered & Sorted Comments
@@ -563,6 +584,16 @@ export default function Forum() {
                 <option value="top">Most Upvoted</option>
                 <option value="replies">Most Discussed</option>
               </select>
+
+              <button
+                id="refresh-forum-btn"
+                onClick={handleForceSync}
+                disabled={isRefreshing || isLoading}
+                title="Force refresh & sync with Supabase database"
+                className="p-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-sm text-gray-600 hover:text-black transition-colors cursor-pointer"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing || isLoading ? 'animate-spin' : ''}`} />
+              </button>
             </div>
           </div>
 
@@ -718,21 +749,33 @@ export default function Forum() {
                       </button>
                     </div>
 
-                    {/* Share / Copy */}
-                    <button
-                      id={`share-btn-${post.id}`}
-                      onClick={() => handleCopyShare(post.id, post.content)}
-                      className="text-gray-400 hover:text-black p-1.5 rounded-sm hover:bg-gray-50 transition-colors cursor-pointer"
-                      title="Copy response quote"
-                    >
-                      {copiedId === post.id ? (
-                        <span className="flex items-center gap-1 text-[11px] text-black font-semibold">
-                          <Check className="w-3.5 h-3.5" /> Copied
-                        </span>
-                      ) : (
-                        <Copy className="w-3.5 h-3.5" />
-                      )}
-                    </button>
+                    <div className="flex items-center gap-1">
+                      {/* Share / Copy */}
+                      <button
+                        id={`share-btn-${post.id}`}
+                        onClick={() => handleCopyShare(post.id, post.content)}
+                        className="text-gray-400 hover:text-black p-1.5 rounded-sm hover:bg-gray-50 transition-colors cursor-pointer"
+                        title="Copy response quote"
+                      >
+                        {copiedId === post.id ? (
+                          <span className="flex items-center gap-1 text-[11px] text-black font-semibold">
+                            <Check className="w-3.5 h-3.5" /> Copied
+                          </span>
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+
+                      {/* Delete Comment */}
+                      <button
+                        id={`delete-btn-${post.id}`}
+                        onClick={() => handleDeleteComment(post.id)}
+                        className="text-gray-400 hover:text-red-600 p-1.5 rounded-sm hover:bg-red-50 transition-colors cursor-pointer"
+                        title="Delete this comment"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
 
                   {/* Threaded Replies Section */}

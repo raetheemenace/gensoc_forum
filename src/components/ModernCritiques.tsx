@@ -5,7 +5,6 @@ const critiques = [
   {
     icon: Network,
     title: 'Intersectional & Black Feminism',
-    citation: '[cite: 2]',
     subtitle: 'Critique of Universalized White Feminism',
     content: 'Early feminist theories often generalized oppression, which led to frameworks like Black feminism that prioritize the intersection of racism, sexism, and diverse experiences.',
     implications: [
@@ -17,7 +16,6 @@ const critiques = [
   {
     icon: Globe,
     title: 'Postcolonial Feminism',
-    citation: '[cite: 2]',
     subtitle: 'Decolonizing Gender & Cultural Hegemony',
     content: 'Highlights how colonialism imposed Western gender norms, erasing indigenous understandings of gender roles.',
     implications: [
@@ -29,7 +27,6 @@ const critiques = [
   {
     icon: Shuffle,
     title: 'Queer Theory',
-    citation: '[cite: 2]',
     subtitle: 'Disruption of the Heteronormative Binary',
     content: 'Disrupts traditional binary understandings of gender and sexuality, challenging the foundational categories of "man" and "woman."',
     implications: [
@@ -79,9 +76,6 @@ export default function ModernCritiques() {
                 <div className="w-12 h-12 bg-gray-100 rounded-sm flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors duration-300">
                   <item.icon className="w-5 h-5 text-black group-hover:text-white transition-colors duration-300" />
                 </div>
-                <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded-xs font-mono font-bold">
-                  {item.citation}
-                </span>
               </div>
 
               <span className="text-[11px] uppercase font-bold tracking-wider text-gray-400 block mb-1">

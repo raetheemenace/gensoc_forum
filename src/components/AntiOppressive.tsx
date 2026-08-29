@@ -5,7 +5,6 @@ const principles = [
   {
     icon: ShieldAlert,
     title: 'Combating Institutional Discrimination',
-    citation: '[cite: 2]',
     subtitle: 'Structural Ideological Resistance',
     description: 'These theories focus on combating institutionalized discrimination maintained by powerful societal groups and ideologies.',
     details: 'Shifts analytical focus away from treating inequality as individual prejudice, targeting systemic gatekeeping in legal systems, educational bodies, and workplace hierarchies.'
@@ -13,7 +12,6 @@ const principles = [
   {
     icon: Users,
     title: 'Generic Anti-Oppressive Approaches',
-    citation: '[cite: 2]',
     subtitle: '1990s Integrated Evolution',
     description: 'In the 1990s, these frameworks began incorporating all forms of oppression into generic approaches to avoid creating a hierarchy of discrimination.',
     details: 'Acknowledges that racism, sexism, ableism, homophobia, and ageism share common roots in systemic dominance, advocating for cross-movement coalition building.'
@@ -21,7 +19,6 @@ const principles = [
   {
     icon: Zap,
     title: 'Empowerment & Client Agency',
-    citation: '[cite: 2]',
     subtitle: 'Subverting Systemic Power Imbalances',
     description: 'A core guideline of anti-oppressive practice is to empower clients to gain control, overcome systemic obstacles, and have their voices heard in decision-making.',
     details: 'Practitioners position marginalized individuals not as passive recipients of charity, but as active agents capable of shaping institutional decisions and community policies.'
@@ -86,9 +83,6 @@ export default function AntiOppressive() {
                   <div className="w-10 h-10 rounded-sm bg-black text-white flex items-center justify-center">
                     <item.icon className="w-5 h-5" />
                   </div>
-                  <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded-xs font-mono font-bold">
-                    {item.citation}
-                  </span>
                 </div>
 
                 <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400 block mb-1">
